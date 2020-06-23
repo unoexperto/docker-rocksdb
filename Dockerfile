@@ -1,9 +1,9 @@
-FROM golang:1.8-alpine
+FROM golang:1.14.4-alpine
 MAINTAINER unoexperto <unoexperto.support@mailnull.com>
 
 RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >>/etc/apk/repositories
-RUN apk add --update --no-cache build-base linux-headers git cmake bash #wget mercurial g++ autoconf libgflags-dev cmake  bash jemalloc
-RUN apk add --update --no-cache zlib zlib-dev bzip2 bzip2-dev snappy snappy-dev lz4 lz4-dev zstd@testing zstd-dev@testing jemalloc jemalloc-dev libtbb-dev@testing libtbb@testing
+RUN apk add --update --no-cache build-base linux-headers git cmake bash perl #wget mercurial g++ autoconf libgflags-dev cmake bash
+RUN apk add --update --no-cache zlib zlib-dev bzip2 bzip2-dev snappy snappy-dev lz4 lz4-dev zstd@testing zstd-dev@testing libtbb-dev@testing libtbb@testing
 
 # installing latest gflags
 RUN cd /tmp && \
@@ -20,7 +20,7 @@ RUN cd /tmp && \
 RUN cd /tmp && \
     git clone https://github.com/facebook/rocksdb.git && \
     cd rocksdb && \
-    git checkout v4.13 && \
+    git checkout v6.10.2 && \
     make shared_lib && \
     mkdir -p /usr/local/rocksdb/lib && \
     mkdir /usr/local/rocksdb/include && \
